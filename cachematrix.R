@@ -1,15 +1,27 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Below is the exercise of speed optimisation
+## of the calculation of the iverse matrix,
+## which is heavily based on the "lexical scope"
+## feature of the R language.
+##
+## The implementation is given in terms of the caching strategy,
+## where the two helper functions are required:
+##  makeCacheMatrix
+##     (creates a "thing", which allows to manipulate the matrix
+##      with a cached inverse)
+## and
+##  cacheSolve
+##      (returns the inverse matrix)
+##       The invertion itself, on the first call,
+##       is done by solve() function in R.
+##       On the second call, the cached value is returned,
+##       without a re-calculation.
 
-
-## We assume that the matrix is always invertible.
-## The invertion itself is done by solve() function in R.
-
-## Write a short comment describing this function
+## In the implementation we assume that the matrix is always invertible.
 
 makeCacheMatrix <- function(x = matrix()) {
         ## Description given in the problem definition (spec):
         ## Creates a special "matrix" object that can cache its inverse.
+
   inv <- NULL
   set <- function(y){
     x <<- y
@@ -25,8 +37,6 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
-
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         ##
@@ -36,6 +46,7 @@ cacheSolve <- function(x, ...) {
         ## If the inverse has already been calculated
         ## (and the matrix has not changed), then the cachesolve should
         ## retrieve the inverse from the cache
+
   inv <- x$getinv()
   if (!is.null(inv)){
     message("Getting cached value of inverse matrix:")
@@ -47,4 +58,3 @@ cacheSolve <- function(x, ...) {
   message("Calculated the inverse matrix using the R's solve() function:")
   inv
 }
-
