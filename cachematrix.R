@@ -22,13 +22,19 @@ makeCacheMatrix <- function(x = matrix()) {
         ## Description given in the problem definition (spec):
         ## Creates a special "matrix" object that can cache its inverse.
 
+  ## Important:
+  ##  operator "<<-" assigns a value to an object in an environment
+  ##  different from the current environment
+
   inv <- NULL
   set <- function(y){
+    ## not here, but "upstairs", therefore "<<-" operator
     x <<- y
     inv <<- NULL
   }
   get <- function() x
   setinv <- function(inv_val){
+    ## not here, but "upstairs", therefore "<<-" operator
     inv <<- inv_val
   }
   getinv <- function() inv
@@ -58,3 +64,4 @@ cacheSolve <- function(x, ...) {
   message("Calculated the inverse matrix using the R's solve() function:")
   inv
 }
+
